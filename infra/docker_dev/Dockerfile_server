@@ -1,0 +1,35 @@
+FROM ubuntu:18.04
+
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV HOME /root
+ENV PATH $HOME/miniconda/bin:$PATH
+
+RUN apt-get update -yqq \
+  && apt-get install -yqq --no-install-recommends \
+    software-properties-common
+
+# -- Install Python dependencies
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -yqq --no-install-recommends \
+    build-essential \
+    python3.7 \
+    python3.7-dev \
+    python3-pip \
+    git \
+    wget \
+    postgresql \
+  && apt-get -q clean
+
+# -- Install Application into container:
+RUN set -ex && mkdir -p /usr/src/app/backend
+
+WORKDIR /usr/src/app
+
+# -- Adding requirement files
+COPY backend/requirements.txt backend/requirements.txt
+COPY backend/requirements-dev.txt backend/requirements-dev.txt
+COPY infra/scripts/setup-server.sh backend/setup-server.sh
+
+# -- Install dependencies:
+RUN backend/setup-server.sh
+
