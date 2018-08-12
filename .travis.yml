@@ -13,27 +13,16 @@ dist: trusty
 matrix:
   fast_finish: true
   include:
-  - python: 3.6
-    env: TEST_TARGET=test
+  # TODO: Uncomment when test is ready
+  # - python: 3.6
+  #   env: TEST_TARGET=test
   - python: 3.6
     env: TEST_TARGET=lint
 
 # Download of any lower level dependencies to install the software
 before_install:
-  - |
-    URL="http://bit.ly/miniconda"
-    echo ""
-    if [ ! -f $HOME/miniconda/bin/conda ] ; then
-      echo "Fresh miniconda installation."
-      wget $URL -O miniconda.sh
-      rm -rf $HOME/miniconda
-      bash miniconda.sh -b -p $HOME/miniconda
-    fi
   - export PATH="$HOME/miniconda/bin:$PATH"
-  - conda update conda --yes
-  - conda config --set show_channel_urls true
-  - conda config --add channels conda-forge --force
-  - conda create --yes -n TEST python=$TRAVIS_PYTHON_VERSION --file backend/requirements.txt --file backend/requirements-dev.txt
+  - ./infra/scripts/setup-server.sh
 
 # Install our software
 install:
