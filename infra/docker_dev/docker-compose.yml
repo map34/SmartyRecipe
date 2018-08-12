@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  webserver:
+    build:
+      context: ../../
+      dockerfile: ./infra/docker_dev/Dockerfile_server
+    volumes:
+      - ../../:/usr/src/app:consistent
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST=postgresdb
+    links:
+      - postgresdb
+    command: bash -c "source activate TEST && ./infra/scripts/wait-for-postgres.sh python backend/server/manage.py runserver 0.0.0.0:8000"
+  postgresdb:
+    image: postgres:10.4
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresdbvolume:/var/lib/postgresql
+
+volumes:
+  postgresdbvolume:
