@@ -39,6 +39,6 @@ docker-compose -f infra/docker_dev/docker-compose.yml -p smarty_recipe up
 * To run Jupyter Hub
 
 ```bash
-docker-compose -f infra/docker_dev/docker-compose.yml -p smarty_recipe  run -p 8888:8888 webserver bash -c "source activate TEST && jupyter notebook --allow-root --notebook-dir=./notebooks --ip=0.0.0.0 --port=8888"
+docker-compose -f infra/docker_dev/docker-compose.yml -p smarty_recipe run --rm -p 8888:8888 webserver bash -c "source activate TEST && jupyter notebook --allow-root --notebook-dir=./notebooks --ip=0.0.0.0 --port=8888"
 ```
 * Go http://localhost:8888?token=[token] (make sure copy paste the token from the terminal to [token])
