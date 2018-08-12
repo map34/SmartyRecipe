@@ -41,10 +41,13 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    'apps.home'
+    'apps.home',
+    'apps.recipes'
 ]
 
-THIRD_PARTY_APPS: List[str] = []
+THIRD_PARTY_APPS: List[str] = [
+    'rest_framework'
+]
 
 INSTALLED_APPS: List[str] = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
