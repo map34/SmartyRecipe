@@ -8,16 +8,20 @@ sudo: false
 # Specifies the linux distribution to run the CI on
 dist: trusty
 
+services:
+  - postgresql
+
+
 # Testing matrix for any environment variables or specific versions
 # of testing environments
 matrix:
   fast_finish: true
   include:
-  # TODO: Uncomment when test is ready
-  # - python: 3.6
-  #   env: TEST_TARGET=test
   - python: 3.6
-    env: TEST_TARGET=lint
+    env:
+      - POSTGRES_NAME=test_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST=localhost
 
 # Download of any lower level dependencies to install the software
 before_install:
@@ -25,8 +29,8 @@ before_install:
   - ./infra/scripts/setup-server.sh
 
 # Install our software
-install:
-  - echo 'Install package here...'
+before_script:
+  - psql -c "create database ${POSTGRES_NAME};" -U ${POSTGRES_USER}
 
 # Script to run any sort of testing, deployments, linting, etc
 script:

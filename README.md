@@ -1,5 +1,7 @@
 # Smarty Recipe
 
+[![Build Status](https://travis-ci.org/ADLSOceanHub/SmartyRecipe.svg?branch=master)](https://travis-ci.org/ADLSOceanHub/SmartyRecipe)
+
 Make cooking hassle-free and more friendly
 
 ## Configs
@@ -11,7 +13,7 @@ Make cooking hassle-free and more friendly
 From the root folder of the project:
 
 ```bash
-docker-compose -f infra/docker_dev/docker-compose.yml build
+docker-compose -f infra/docker_dev/docker-compose.yml -p smarty_recipe build
 ```
 
 ## Using Docker
