@@ -10,7 +10,7 @@ from rest_framework.parsers import JSONParser
 @csrf_exempt
 def recipe_list(request):
     """
-    List all code snippets, or create a new snippet.
+    List all recipes, or create a new recipe.
     """
     if request.method == 'GET':
         recipes = Recipe.objects.all()
@@ -29,7 +29,7 @@ def recipe_list(request):
 @csrf_exempt
 def recipe_detail(request, pk):
     """
-    Retrieve, update or delete a code snippet.
+    Retrieve, update or delete a recipe.
     """
     try:
         recipe = Recipe.objects.get(pk=pk)
