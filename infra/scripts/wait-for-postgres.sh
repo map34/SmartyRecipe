@@ -7,9 +7,9 @@ set -e
 cmd="$@"
 
 until psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -c '\l'; do
-  echo >&2 "$(date +%Y%m%dt%H%M%S) Postgres is unavailable - sleeping"
+  echo >&2 "$(date +%Y-%m-%dT%H-%M-%S) Postgres is unavailable - sleeping"
   sleep 1
 done
-echo >&2 "$(date +%Y%m%dt%H%M%S) Postgres is up - executing command"
+echo >&2 "$(date +%Y-%m-%dT%H-%M-%S) Postgres is up - executing command"
 
 exec $cmd

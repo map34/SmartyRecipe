@@ -15,7 +15,7 @@ services:
       - POSTGRES_HOST=postgresdb
     links:
       - postgresdb
-    command: bash -c "source activate TEST && ./infra/scripts/wait-for-postgres.sh python backend/server/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "./infra/scripts/start-server.sh"
   postgresdb:
     image: postgres:10.4
     ports:
