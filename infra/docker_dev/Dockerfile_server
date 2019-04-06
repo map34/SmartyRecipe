@@ -7,7 +7,7 @@ ENV PATH $HOME/miniconda/bin:$PATH
 
 RUN apt-get update -yqq \
   && apt-get install -yqq --no-install-recommends \
-    software-properties-common
+    software-properties-common openjdk-8-jdk
 
 # -- Install Python dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -yqq --no-install-recommends \
@@ -32,4 +32,3 @@ COPY infra/scripts/setup-server.sh backend/setup-server.sh
 
 # -- Install dependencies:
 RUN backend/setup-server.sh
-
